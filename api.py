@@ -12,6 +12,8 @@ from detection import detect
 app = flask.Flask(__name__)
 
 
+
+
 @app.route("/lowlight", methods=["POST"])
 def predict():
     # initialize the data dictionary that will be returned from the
@@ -26,6 +28,9 @@ def predict():
             npimg = np.fromstring(image, np.uint8)
             img = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
             img = low_image_enhancement(img)
+            # cv2.imshow("imagae",img)
+            # cv2.waitKey(0)
+            # cv2.destroyAllWindows()
             img = Image.fromarray(img.astype("uint8"))
             rawBytes = io.BytesIO()
             img.save(rawBytes, "JPEG")
@@ -37,7 +42,7 @@ def predict():
 
 
 @app.route("/detect", methods=["POST"])
-def predict():
+def detection():
     # initialize the data dictionary that will be returned from the
     # view
     data = {"success": False}
@@ -50,6 +55,9 @@ def predict():
             npimg = np.fromstring(image, np.uint8)
             img = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
             img = detect(img)
+            # cv2.imshow("image", img)
+            # cv2.waitKey(0)
+            # cv2.destroyAllWindows()
             img = Image.fromarray(img.astype("uint8"))
             rawBytes = io.BytesIO()
             img.save(rawBytes, "JPEG")

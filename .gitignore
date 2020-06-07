@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
+yolov3.weights
+classes.names
+yolov3.cfg
 
 # C extensions
 *.so
